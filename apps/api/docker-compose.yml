@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  postgres_db:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: neonnova
+      POSTGRES_PASSWORD: neonnovapassword
+      POSTGRES_DB: neonnovadb
+    ports:
+      - "5499:5432"

@@ -1,0 +1,93 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  nombre    String
+  rol       Role     @default(ADMIN)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Cliente {
+  id        String   @id @default(cuid())
+  nombre    String
+  telefono  String   @unique
+  email     String?
+  direccion String?
+  pedidos   Pedido[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([telefono])
+  @@index([nombre])
+}
+
+model Pedido {
+  id                     String        @id @default(cuid())
+  numeroOrden            Int           @unique @default(autoincrement())
+  titulo                 String
+  clienteId              String
+  cliente                Cliente       @relation(fields: [clienteId], references: [id])
+  
+  tipo                   TipoPedido
+  estado                 EstadoPedido  @default(PENDIENTE)
+  prioridad              Prioridad     @default(MEDIA)
+  
+  fechaPedido            DateTime      @default(now())
+  fechaEntregaSolicitada DateTime?
+  fechaEntregaReal       DateTime?
+
+  notasInternas          String?
+
+  items                  ItemPedido[]
+  createdAt              DateTime      @default(now())
+  updatedAt              DateTime      @updatedAt
+}
+
+model ItemPedido {
+  id                     String   @id @default(cuid())
+  pedidoId               String
+  pedido                 Pedido   @relation(fields: [pedidoId], references: [id], onDelete: Cascade)
+
+  tipo                   TipoPedido
+  descripcion            String?
+  cantidad               Int      @default(1)
+  precioUnitario         Decimal  @db.Decimal(10, 2)
+
+  @@index([pedidoId])
+}
+
+enum Role {
+  ADMIN
+}
+
+enum TipoPedido {
+  IMPRESION_3D
+  CARTEL_NEON
+  COMBO
+}
+
+enum EstadoPedido {
+  PENDIENTE
+  EN_PROCESO
+  LISTO
+  ENTREGADO
+  CANCELADO
+}
+
+enum Prioridad {
+  BAJA
+  MEDIA
+  ALTA
+  URGENTE
+}

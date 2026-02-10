@@ -10,7 +10,7 @@ interface Props {
 export function MaterialSection({ register, errors }: Props) {
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-bold text-slate-300 border-b border-slate-600 pb-2">Materiales</h3>
+      <h3 className="text-lg font-bold border-b text-foreground/90 border-foreground/30 pb-2">Materiales</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <InputGroup
           label="Gramos de Filamento"

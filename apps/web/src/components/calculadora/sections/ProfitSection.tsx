@@ -10,7 +10,7 @@ interface Props {
 export function ProfitSection({ register, errors }: Props) {
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-bold text-slate-300 border-slate-600 border-b pb-2">
+      <h3 className="text-lg font-bold text-foreground/90 border-foreground/30 border-b pb-2">
         Margen de Ganancia
       </h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -20,7 +20,7 @@ export function ProfitSection({ register, errors }: Props) {
           error={errors.profitMargin?.message}
           prefix="units"
         />
-        <div className="space-y-2 sm:col-span-2 border bg-slate-800/50 border-violet-500/50 p-4 rounded">
+        <div className="space-y-2 sm:col-span-2 border bg-foreground/5 border-violet-500/50 p-4 rounded">
           <p className="text-sm font-semibold text-violet-400">Referencias:</p>
           <p className="text-sm text-slate-300/90">Precio mayorista → 2</p>
           <p className="text-sm text-slate-300/90">Precio minorista → 3</p>

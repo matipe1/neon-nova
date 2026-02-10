@@ -10,7 +10,7 @@ interface Props {
 
 export function LedSection({ register, errors, isLedFrame }: Props) {
   return (
-    <div className={`space-y-4 p-4 rounded-xl border transition-all ${isLedFrame ? 'bg-slate-800/50 border-violet-500/50' : 'bg-slate-800/30 border-slate-700'}`}>
+    <div className={`space-y-4 p-4 rounded-xl border transition-all ${isLedFrame ? 'bg-foreground/3 border-violet-500/50' : 'bg-foreground/5 border-violet-500/30'}`}>
       <div className="flex items-center justify-between">
         <h3 className={`text-sm font-bold tracking-widest ${isLedFrame ? 'text-violet-400' : 'text-slate-400'}`}>Cartel LED</h3>
         <InputGroup label="" type="checkbox" registration={register("isLedFrame")} />

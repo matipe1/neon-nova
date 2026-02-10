@@ -10,7 +10,7 @@ interface Props {
 export function TimeEnergySection({ register, errors }: Props) {
   return (
   <div className="space-y-4">
-    <h3 className="text-lg font-bold text-slate-300 border-slate-600 border-b pb-2">
+    <h3 className="text-lg font-bold text-foreground/90 border-foreground/30 border-b pb-2">
       Energía
     </h3>
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

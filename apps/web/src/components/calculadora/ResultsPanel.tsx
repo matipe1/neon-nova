@@ -15,7 +15,7 @@ export function ResultsPanel({ results, profitMargin }: Props) {
 
   if (!isValid) {
     return (
-      <div className="bg-slate-900 text-slate-500 p-8 rounded-2xl h-fit flex flex-col items-center justify-center gap-2">
+      <div className="bg-foreground/5 text-foreground/80 p-8 rounded-2xl h-fit flex flex-col items-center justify-center gap-2">
         <p>Ingresa los datos para calcular...</p>
       </div>
     );
@@ -28,7 +28,7 @@ export function ResultsPanel({ results, profitMargin }: Props) {
   };
 
   return (
-    <div className="bg-slate-900 text-white p-6 rounded-2xl h-fit sticky top-6 shadow-2xl border border-slate-800">
+    <div className="bg-foreground/1 text-foreground/80 p-6 rounded-2xl h-fit sticky top-6 shadow-2xl border border-primary/40">
       <div className="flex items-center gap-2 mb-6">
         <h2 className="text-xl font-bold text-white">Resumen</h2>
         <span className="flex h-3 w-3 relative">
@@ -39,9 +39,9 @@ export function ResultsPanel({ results, profitMargin }: Props) {
 
       <div className="space-y-4">
         {/* Precio Final */}
-        <div className="bg-slate-800/50 p-4 rounded-xl border border-slate-700 text-center relative overflow-hidden">
+        <div className="bg-foreground/10 p-4 rounded-xl border border-primary/30 text-center relative overflow-hidden">
           <div className="absolute top-0 left-0 w-1 h-full bg-violet-500"></div>
-          <p className="text-slate-400 text-xs uppercase tracking-widest font-semibold mb-1">
+          <p className="text-foreground/80 text-xs uppercase tracking-widest font-semibold mb-1">
             Precio Sugerido
           </p>
           <p className="text-4xl md:text-5xl font-black text-white tracking-tight">
@@ -68,7 +68,7 @@ export function ResultsPanel({ results, profitMargin }: Props) {
         </div>
 
         {/* Desglose */}
-        <div className="pt-4 mt-4 border-t border-slate-800 space-y-2 text-sm text-slate-400">
+        <div className="pt-4 mt-4 border-t border-slate-800 space-y-2 text-sm text-foreground/60">
           <div className="flex justify-between">
             <span>Costo de Materiales</span>
             <span className="pr-2">
@@ -93,7 +93,7 @@ export function ResultsPanel({ results, profitMargin }: Props) {
               ${formattedCost(results.breakdown.operationalCost)}
             </span>
           </div>
-          <div className="flex justify-between py-1.5 border-t border-slate-800">
+          <div className="flex justify-between py-1.5 border-t text-foreground/70 border-primary/40">
             <span>Costo Base (Subtotal)</span>
             <span className="pr-2">
               ${Math.ceil(results.subtotal).toLocaleString("es-AR")}

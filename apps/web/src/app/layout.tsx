@@ -1,5 +1,14 @@
-import "./globals.css";
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import type { Metadata } from 'next';
+import './globals.css';
+
+import { Navbar } from '../components/layout/Navbar';
+import { Footer } from '../components/layout/Footer';
+
+export const metadata: Metadata = {
+  title: "Neon Nova 3D",
+  description: "Servicios de impresión 3D y cartelería neón LED de alta calidad"
+};
 
 export default function RootLayout({
   children,
@@ -9,8 +18,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
-        <SpeedInsights />
+        <Navbar />
+        <main>
+          {children}
+          <SpeedInsights />
+        </main>
+        {/* <Footer /> */}
       </body>
     </html>
   );

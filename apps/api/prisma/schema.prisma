@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum OrderStatus {
+  PENDIENTE
+  COMENZADO
+  COMPLETADO
+  ENTREGADO
+  CANCELADO
+}
+
+model User {
+  id             String   @id @default(cuid())
+  email          String   @unique
+  passwordHashed String
+  name           String?
+  createdAt      DateTime @default(now())
+}
+
+model Product {
+  id          String  @id @default(cuid())
+  name        String
+  description String
+  price       Decimal @db.Decimal(10, 2)
+  stock       Int     @default(0)
+  imageUrl    String?
+
+  categoryId String?
+  category   Category?   @relation(fields: [categoryId], references: [id])
+  tags       Tag[]
+  orderItems OrderItem[]
+}
+
+model Tag {
+  id       String    @id @default(cuid())
+  name     String    @unique
+  products Product[]
+}
+
+model Category {
+  id       String    @id @default(cuid())
+  name     String
+  products Product[]
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  status        OrderStatus @default(PENDIENTE)
+  totalEanings  Decimal     @db.Decimal(10, 2)
+  customerName  String?
+  customerPhone String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  items OrderItem[]
+}
+
+model OrderItem {
+  id              String  @id @default(cuid())
+  quantity        Int
+  priceAtPurchase Decimal @db.Decimal(10, 2)
+
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id])
+  product   Product? @relation(fields: [productId], references: [id])
+  productId String?
+}

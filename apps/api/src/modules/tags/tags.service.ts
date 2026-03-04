@@ -22,12 +22,12 @@ export class TagsService {
   }
 
   async findOne(id: string): Promise<Tag> {
-    const tag = await this.prisma.tag.findUnique({
-      where: { id },
-      include: { _count: { select: { products: true } } },
-    });
-    if (!tag) throw new NotFoundException(`Tag #${id} not found`);
-    return tag;
+    try {
+      return await this.prisma.tag.findUniqueOrThrow({ where: { id } });
+    } catch {
+      // Prisma error code: P2025
+      throw new NotFoundException(`Tag with ID ${id} was not found`);
+    }
   }
 
   async remove(id: string): Promise<Tag> {

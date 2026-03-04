@@ -1,14 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from './prisma/prisma.module';
+import { TagsModule } from './modules/tags/tags.module';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
-    PrismaModule,
-  ],
+  imports: [PrismaModule, TagsModule],
   controllers: [],
   providers: [],
 })

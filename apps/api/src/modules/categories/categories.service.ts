@@ -41,6 +41,7 @@ export class CategoriesService {
   }
 
   async remove(id: string): Promise<Category> {
+    await this.findOne(id);
     return this.prisma.category.delete({ where: { id } });
   }
 }

@@ -5,10 +5,16 @@ import {
 } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { compare } from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
+import { AuthJwtPayload } from './types/auth-jwtPayload';
+import { SignInDto } from './dto/sign-in.dto';
 
 @Injectable()
 export class AuthService {
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    private jwtService: JwtService,
+  ) {}
 
   async validateUser(email: string, pass: string) {
     try {
@@ -28,5 +34,20 @@ export class AuthService {
       if (error instanceof NotFoundException)
         throw new UnauthorizedException('Invalid credentials');
     }
+  }
+
+  async signIn(signInDto: SignInDto) {
+    const user = await this.usersService.findByEmail(signInDto.email);
+
+    const payload: AuthJwtPayload = {
+      email: user.email,
+      sub: user.id,
+      role: user.role,
+    };
+
+    return {
+      ...payload,
+      access_token: await this.jwtService.signAsync(payload),
+    };
   }
 }

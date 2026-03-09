@@ -22,11 +22,17 @@ enum OrderStatus {
   CANCELADO
 }
 
+enum Role {
+  ADMIN
+  USER
+}
+
 model User {
   id             String   @id @default(cuid())
   email          String   @unique
-  passwordHashed String
+  password       String
   name           String?
+  role           Role     @default(USER)
   createdAt      DateTime @default(now())
 }
 

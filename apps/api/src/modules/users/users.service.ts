@@ -37,7 +37,7 @@ export class UsersService {
     return user;
   }
 
-  async create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto): Promise<Omit<User, 'password'>> {
     const existingUser = await this.prisma.user.findUnique({
       where: { email: createUserDto.email },
     });
@@ -64,5 +64,12 @@ export class UsersService {
     } catch {
       throw new InternalServerErrorException('User creation error');
     }
+  }
+
+  async getUserProfileByEmail(email: string): Promise<Omit<User, 'password'>> {
+    // eslint-disable-next-line
+    const { password, ...result } = await this.findByEmail(email);
+
+    return result;
   }
 }

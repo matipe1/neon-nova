@@ -5,6 +5,9 @@ import { CategoriesModule } from './modules/categories/categories.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { ConfigModule } from '@nestjs/config';
+import { ProductsModule } from './modules/products/products.module';
+import { OrdersModule } from './modules/orders/orders.module';
+import { OrderItemsModule } from './modules/order-items/order-items.module';
 import jwtConfig from './modules/auth/config/jwt.config';
 
 @Module({
@@ -18,6 +21,9 @@ import jwtConfig from './modules/auth/config/jwt.config';
     CategoriesModule,
     AuthModule,
     UsersModule,
+    ProductsModule,
+    OrdersModule,
+    OrderItemsModule,
   ],
   controllers: [],
   providers: [],

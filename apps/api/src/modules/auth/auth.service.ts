@@ -19,9 +19,7 @@ export class AuthService {
   async validateUser(email: string, pass: string) {
     try {
       const user = await this.usersService.findByEmail(email);
-      if (!user) {
-        throw new UnauthorizedException('Invalid credentials');
-      }
+      if (!user) throw new UnauthorizedException('Invalid credentials');
 
       const isPassMatch = await compare(pass, user.password);
       if (!isPassMatch) throw new UnauthorizedException('Invalid credentials');

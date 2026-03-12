@@ -31,7 +31,7 @@ model User {
   id             String   @id @default(cuid())
   email          String   @unique
   password       String
-  name           String?
+  name           String
   role           Role     @default(USER)
   createdAt      DateTime @default(now())
 }
@@ -45,7 +45,7 @@ model Product {
   imageUrl    String?
 
   categoryId String?
-  category   Category?   @relation(fields: [categoryId], references: [id])
+  category   Category?   @relation(fields: [categoryId], references: [id], onDelete: SetNull)
   tags       Tag[]
   orderItems OrderItem[]
 }
@@ -65,7 +65,7 @@ model Category {
 model Order {
   id            String      @id @default(cuid())
   status        OrderStatus @default(PENDIENTE)
-  totalEanings  Decimal     @db.Decimal(10, 2)
+  totalEarnings  Decimal     @db.Decimal(10, 2)
   customerName  String?
   customerPhone String?
   createdAt     DateTime    @default(now())
@@ -80,7 +80,7 @@ model OrderItem {
   priceAtPurchase Decimal @db.Decimal(10, 2)
 
   orderId   String
-  order     Order    @relation(fields: [orderId], references: [id])
-  product   Product? @relation(fields: [productId], references: [id])
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product? @relation(fields: [productId], references: [id], onDelete: Restrict)
   productId String?
 }

@@ -1,12 +1,4 @@
-import {
-  IsEmail,
-  IsEnum,
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-  MinLength,
-} from 'class-validator';
-import { Role } from '../../../generated/prisma/enums';
+import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
@@ -23,8 +15,4 @@ export class CreateUserDto {
   @MinLength(3, { message: 'Name is too short (min 3 characters)' })
   @IsNotEmpty()
   name!: string;
-
-  @IsEnum(Role, { message: 'Invalid role value' })
-  @IsOptional()
-  role?: Role;
 }

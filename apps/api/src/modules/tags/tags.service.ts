@@ -1,27 +1,27 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTagDto } from './dto/create-tag.dto';
 import { PrismaService } from '../../prisma/prisma.service';
-import { Tag } from '../../generated/prisma/client';
+import { TagResponseDto } from './dto/tag-response.dto';
 
 @Injectable()
 export class TagsService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createTagDto: CreateTagDto): Promise<Tag> {
+  async create(dto: CreateTagDto): Promise<TagResponseDto> {
     return this.prisma.tag.upsert({
-      create: { name: createTagDto.name },
+      create: { name: dto.name },
       update: {},
-      where: { name: createTagDto.name },
+      where: { name: dto.name },
     });
   }
 
-  async findAll(): Promise<Tag[]> {
+  async findAll(): Promise<TagResponseDto[]> {
     return this.prisma.tag.findMany({
       include: { _count: { select: { products: true } } },
     });
   }
 
-  async findOne(id: string): Promise<Tag> {
+  async findOne(id: string): Promise<TagResponseDto> {
     try {
       return await this.prisma.tag.findUniqueOrThrow({ where: { id } });
     } catch {
@@ -30,7 +30,7 @@ export class TagsService {
     }
   }
 
-  async remove(id: string): Promise<Tag> {
+  async remove(id: string): Promise<TagResponseDto> {
     await this.findOne(id);
     return this.prisma.tag.delete({ where: { id } });
   }

@@ -2,23 +2,23 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { PrismaService } from '../../prisma/prisma.service';
-import { Category } from '../../generated/prisma/client';
+import { CategoryResponseDto } from './dto/category-response.dto';
 
 @Injectable()
 export class CategoriesService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createCategoryDto: CreateCategoryDto): Promise<Category> {
-    return this.prisma.category.create({ data: createCategoryDto });
+  async create(dto: CreateCategoryDto): Promise<CategoryResponseDto> {
+    return this.prisma.category.create({ data: dto });
   }
 
-  async findAll(): Promise<Category[]> {
+  async findAll(): Promise<CategoryResponseDto[]> {
     return this.prisma.category.findMany({
       include: { _count: { select: { products: true } } },
     });
   }
 
-  async findOne(id: string): Promise<Category> {
+  async findOne(id: string): Promise<CategoryResponseDto> {
     try {
       return await this.prisma.category.findUniqueOrThrow({
         where: { id },
@@ -31,16 +31,16 @@ export class CategoriesService {
 
   async update(
     id: string,
-    updateCategoryDto: UpdateCategoryDto,
-  ): Promise<Category> {
+    updatedDto: UpdateCategoryDto,
+  ): Promise<CategoryResponseDto> {
     await this.findOne(id);
     return this.prisma.category.update({
       where: { id },
-      data: updateCategoryDto,
+      data: updatedDto,
     });
   }
 
-  async remove(id: string): Promise<Category> {
+  async remove(id: string): Promise<CategoryResponseDto> {
     await this.findOne(id);
     return this.prisma.category.delete({ where: { id } });
   }

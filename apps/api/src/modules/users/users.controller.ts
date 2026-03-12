@@ -2,24 +2,20 @@ import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth/jwt-auth.guard';
-import { User } from '../../generated/prisma/client';
+import { UserResponseDto } from './dto/user-response.dto';
 
 @Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @Post()
-  async create(
-    @Body() createUserDto: CreateUserDto,
-  ): Promise<Omit<User, 'password'>> {
+  async create(@Body() createUserDto: CreateUserDto): Promise<UserResponseDto> {
     return this.usersService.create(createUserDto);
   }
 
-  @Get(':email')
+  @Get(':id')
   @UseGuards(JwtAuthGuard)
-  async getProfile(
-    @Param('email') email: string,
-  ): Promise<Omit<User, 'password'>> {
-    return this.usersService.getUserProfileByEmail(email);
+  async getProfile(@Param('id') id: string): Promise<UserResponseDto> {
+    return this.usersService.findById(id);
   }
 }

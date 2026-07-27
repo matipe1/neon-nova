@@ -45,6 +45,7 @@ export interface Supply {
   unit_cost: number;
   stock_quantity: number;
   unit_of_measure: 'unit' | 'ml' | 'grams';
+  min_stock_alert: number;
   created_at: string;
 }
 
@@ -55,6 +56,7 @@ export interface Filament {
   color: string;
   cost_per_gram: number;
   stock_grams: number;
+  min_stock_alert: number;
   created_at: string;
 }
 

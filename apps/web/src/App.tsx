@@ -3,6 +3,7 @@ import { AppLayout } from './components/layout/AppLayout';
 import type { AppView } from './components/layout/Sidebar';
 import { CostCalculator } from './components/features/calculator/CostCalculator';
 import { InventoryManager } from './components/features/inventory/InventoryManager';
+import { ProductManager } from './components/features/products/ProductManager';
 
 export function App() {
   const [currentView, setCurrentView] = useState<AppView>('inventory-filaments');
@@ -17,22 +18,7 @@ export function App() {
         <InventoryManager key="supplies" initialTab="supplies" />
       )}
       {currentView === 'calculator' && <CostCalculator />}
-
-      {/* Placeholders para las siguientes vistas del mapa de rutas */}
-      {currentView === 'dashboard' && (
-        <PlaceholderView
-          icon="🏠"
-          title="Inicio / Dashboard"
-          description="Métricas de ventas, gráfico MoM de 6 meses y resumen mensual en desarrollo."
-        />
-      )}
-      {currentView === 'catalog' && (
-        <PlaceholderView
-          icon="🛍️"
-          title="Catálogo de Productos"
-          description="Gestión ligera de productos terminados en formato tabla + modal de detalle en desarrollo."
-        />
-      )}
+      {currentView === 'catalog' && <ProductManager />}
       {currentView === 'orders' && (
         <PlaceholderView
           icon="📋"

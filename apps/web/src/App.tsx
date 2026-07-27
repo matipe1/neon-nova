@@ -4,6 +4,7 @@ import type { AppView } from './components/layout/Sidebar';
 import { CostCalculator } from './components/features/calculator/CostCalculator';
 import { InventoryManager } from './components/features/inventory/InventoryManager';
 import { ProductManager } from './components/features/products/ProductManager';
+import { OrderManager } from './components/features/orders/OrderManager';
 
 export function App() {
   const [currentView, setCurrentView] = useState<AppView>('inventory-filaments');
@@ -19,13 +20,7 @@ export function App() {
       )}
       {currentView === 'calculator' && <CostCalculator />}
       {currentView === 'catalog' && <ProductManager />}
-      {currentView === 'orders' && (
-        <PlaceholderView
-          icon="📋"
-          title="Ventas / Pedidos"
-          description="Gestor de pedidos con matriz de estados (BUDGETED -> CONFIRMED -> PAID) en desarrollo."
-        />
-      )}
+      {currentView === 'orders' && <OrderManager />}
       {currentView === 'finances' && (
         <PlaceholderView
           icon="💰"

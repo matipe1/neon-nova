@@ -33,6 +33,7 @@ export interface Product {
   unit_cost: number;
   sale_price: number;
   tags: string[];
+  images?: string[];
   components?: PrintComponent[];
   supplies?: SupplyComponent[];
   created_at: string;

@@ -120,9 +120,9 @@ export const CostCalculator = ({ initialValues }: CostCalculatorProps = {}) => {
   return (
     <div
       style={{
-        maxWidth: '1200px',
-        margin: '0 auto',
-        padding: '32px 16px',
+        width: '100%',
+        padding: '32px 40px',
+        boxSizing: 'border-box',
         fontFamily: 'system-ui, -apple-system, sans-serif',
         color: '#f4f4f5',
       }}

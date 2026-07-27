@@ -264,6 +264,21 @@ UI Design Pattern: Dashboard layout based on reference specs (Header KPIs, main 
 
 ---
 
+### 3.6 Admin Catalog Management vs. Public Customer Catalog UI Patterns
+
+To maximize operational performance and optimize network bandwidth, the system explicitly separates Admin Management and Public Customer UI paradigms:
+
+* **Admin Catalog Management (`/catalog`):**
+  * **Tabular Design:** Lightweight, text-based data grid displaying key operational metrics (Product Name, Category, Stock Quantity, Min Stock Alert, Unit Cost, Sale Price, Quick Actions).
+  * **Performance Optimization:** Images and heavy media are not rendered in the main management table.
+  * **On-Demand Detail Modal/Drawer:** Full product specs, component specifications (`PrintComponent[]`), required supplies (`SupplyComponent[]`), and media gallery are loaded exclusively on-demand when opening the Product Detail/Edit Modal.
+
+* **Public Customer Catalog (`/public/catalog`):**
+  * **Visual Grid Design:** Rich e-commerce card layout displaying high-resolution product images, tags, and customer pricing.
+  * **Cart & Checkout:** Interactive Shopping Cart drawer with automatic WhatsApp order submission payload.
+
+---
+
 ## 4. Route Map Strategy (SPA Architecture)
 
 ```text

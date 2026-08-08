@@ -2,11 +2,13 @@ export type OrderStatus = 'BUDGETED' | 'PENDING' | 'CONFIRMED' | 'PAID' | 'CANCE
 
 export type TransactionType = 'INCOME' | 'EXPENSE';
 
-export type TransactionCategory = 
+export type TransactionCategory =
   | 'Venta Presencial'
+  | 'Venta Catálogo'
   | 'Mercado Libre'
-  | 'Instagram'
+  | 'Venta Redes'
   | 'Insumos'
+  | 'Diseño'
   | 'Servicios'
   | 'Otros';
 

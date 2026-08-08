@@ -1,14 +1,10 @@
 import { Sidebar } from './Sidebar';
 
-interface AppLayoutProps {
-  children: React.ReactNode;
-}
-
-export const AppLayout = ({ children }: AppLayoutProps) => {
+export const AppLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', width: '100%', backgroundColor: '#09090b' }}>
+    <div className="flex min-h-screen w-full bg-zinc-950 text-zinc-100 font-sans">
       <Sidebar />
-      <main style={{ flex: 1, overflowY: 'auto', minWidth: 0, width: '100%', backgroundColor: '#09090b' }}>
+      <main className="flex-1 min-w-0 overflow-y-auto bg-zinc-950">
         {children}
       </main>
     </div>

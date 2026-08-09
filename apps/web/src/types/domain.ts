@@ -1,20 +1,8 @@
 export type OrderStatus = 'BUDGETED' | 'PENDING' | 'CONFIRMED' | 'PAID' | 'CANCELLED';
 
-export type TransactionType = 'INCOME' | 'EXPENSE';
-
-export type TransactionCategory =
-  | 'Venta Presencial'
-  | 'Venta Catálogo'
-  | 'Mercado Libre'
-  | 'Venta Redes'
-  | 'Insumos'
-  | 'Diseño'
-  | 'Servicios'
-  | 'Otros';
-
 export interface PrintComponent {
   id?: string;
-  name: string; // e.g., "Caja / Base", "Tapa / Difusor"
+  name: string;
   filament_id: string;
   grams_required: number;
   print_time_hours: number;
@@ -92,15 +80,4 @@ export interface Order {
   created_at: string;
   updated_at: string;
   items: OrderItem[];
-}
-
-export interface FinancialTransaction {
-  id: string;
-  type: TransactionType;
-  amount: number;
-  category: TransactionCategory;
-  description: string;
-  date: string;
-  order_id?: string;
-  created_at: string;
 }
